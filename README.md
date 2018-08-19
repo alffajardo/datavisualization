@@ -1,3 +1,5 @@
+
+
 # Data visualization in R (datacamp)
 
 ## Lerning to plot with R graphics
@@ -29,6 +31,10 @@ plot(whiteside$Temp,whiteside$Gas,xlab="Outside Temperture",ylab="Heating gas co
 
 ![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot1.png)
 
+![](/home/alfonso/Documentos/github/datavisualzation/scatterplot1.png)
+
+
+
 ### Adding details to a plot using point shapes, color, and reference lines
 
 Adding additional details to your explanatory plots can help emphasize certain aspects of your data. For example, by specifying the pch and col arguments to the plot() function, you can add different point shapes and colors to show how different variables or subsets of your data relate to each other. In addition, you can add a new set of points to your existing scatterplot with the points() function, and add reference lines with the abline() function.
@@ -50,3 +56,37 @@ abline(a=0,b=1,lty=2,lwd=2)
 ```
 
 ![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot2.png)
+
+
+
+![](/home/alfonso/Documentos/github/datavisualzation/scatterplot2.png)
+
+### Creating multiple plot arrays
+
+You can plot multiple graphs on a single pane using the `par()` function with its `mfrow` parameter. For example, `par(mfrow = c(1, 2))` creates a plot array with 1 row and 2 columns, allowing you to view two graphs side-by-side. This way, you can compare and contrast different datasets or different views of the same dataset. This exercise asks you to compare two views of the [`Animals2`](https://www.rdocumentation.org/packages/robustbase/topics/Animals2) dataset from the `robustbase` package, differing in how its variables are represented.
+
+The objective of this exercise is to emphasize that the original representation of the variables that we have in a dataset is not always the best one for visualization or analysis. By representing the original variables in log scale, for example, we can better see and understand the data.
+
+```R
+# Load the robustbase package
+library(robustbase)
+
+# Set up the side-by-side plot array
+par(mfrow= c(1,2))
+
+# First plot: brain vs. body in its original form
+plot(Animals2$body,Animals2$brain)
+# Add the first title
+title("Original representation")
+
+
+# Second plot: log-log plot of brain vs. body
+plot(Animals2$body,Animals2$brain,log="xy")
+
+
+# Add the second title
+title("Log-log plot")R
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/par.png)
+
