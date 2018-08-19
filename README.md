@@ -222,3 +222,53 @@ A useful alternative that is equally effective in representing repeated data poi
 
 This exercise asks you to construct both a scatterplot and a sunflowerplot from the same dataset, one that contains repeated data points. Comparing these plots allows you to see how much information can be lost in a standard scatterplot when some data points appear many times.
 
+```R
+library(MASS)
+# Set up a side-by-side plot array
+par(mfrow = c(1,2))
+
+# Create the standard scatterplot
+plot(Boston$zn,Boston$rad)
+
+# Add the title
+title("Standard scatterplot")
+
+# Create the sunflowerplot
+sunflowerplot(Boston$zn,Boston$rad)
+
+# Add the title
+title("Sunflower plot")
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/scatterplot_sunflowerplot.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot_sunflowerplot.png)
+
+## Useful options for the boxplot() function
+
+The `boxplot()` function shows how the distribution of a numerical variable `y`differs across the unique levels of a second variable, `x`. To be effective, this second variable should not have too many unique levels (e.g., 10 or fewer is good; many more than this makes the plot difficult to interpret).
+
+The `boxplot()` function also has a number of optional parameters and this exercise asks you to use three of them to obtain a more informative plot:
+
+- `varwidth` allows for variable-width boxplots that show the different sizes of the data subsets.
+- `log` allows for log-transformed y-values.
+- `las` allows for more readable axis labels.
+
+This exercise also illustrates the use of the formula interface: `y ~ x` indicates that we want a boxplot of the `y` variable across the different levels of the `x`variable. See [`boxplot()`](https://www.rdocumentation.org/packages/graphics/topics/boxplot) for more details.
+
+
+
+```
+library(MASS)
+# Create a variable-width boxplot with log y-axis & horizontal labels
+boxplot(crim ~ rad, data = Boston, 
+        varwidth = TRUE, log = "y", las = 1)
+
+# Add a title
+title("Crime rate vs. radial highway index")
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/boxplot.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/boxplot.png)
+
