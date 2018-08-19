@@ -85,7 +85,7 @@ plot(Animals2$body,Animals2$brain,log="xy")
 
 
 # Add the second title
-title("Log-log plot")R
+title("Log-log plot")
 ```
 
 ![](/home/alfonso/Documentos/github/datavisualzation/par.png)
