@@ -272,3 +272,143 @@ title("Crime rate vs. radial highway index")
 
 ![](https://github.com/alffajardo/datavisualzation/blob/master/boxplot.png)
 
+## Using the mosaicplot() function
+
+A mosaic plot may be viewed as a scatterplot between categorical variables and it is supported in R with the `mosaicplot()` function.
+
+As this example shows, in addition to categorical variables, this plot can also be useful in understanding the relationship between numerical variables, either integer- or real-valued, that take only a few distinct values.
+
+More specifically, this exercise asks you to construct a mosaic plot showing the relationship between the numerical `carb` and `cyl` variables from the [`mtcars`](https://www.rdocumentation.org/packages/datasets/topics/mtcars) data frame, variables that exhibit 6 and 3 unique values, respectively
+
+```R
+# Create a mosaic plot using the formula interface
+mosaicplot(carb ~ cyl, data=mtcars)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/mosaicplot.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/mosaicplot.png)
+
+
+
+## Using the bagplot() function
+
+A single box plot gives a graphical representation of the range of variation in a numerical variable, based on five numbers:
+
+The minimum and maximum values
+The median (or "middle") value
+Two intermediate values called the lower and upper quartiles
+In addition, the standard box plot computes a nominal data range from three of these numbers and flags points falling outside this range as outliers, representing them as distinct points.
+
+The bag plot extends this representation to two numerical variables, showing their relationship, both within two-dimensional "bags" corresponding to the "box" in the standard boxplot, and indicating outlying points outside these limits.
+
+This exercise asks you to construct, first, side-by-side box plots of the Min.Price and Max.Price variables from the mtcars dataset, and then to use the bagplot() function from the aplpack package to construct the corresponding bag plot.
+
+```R
+library(MASS)
+library(aplpack)
+# Load aplpack to make the bagplot() function available
+library(aplpack)
+
+# Create a side-by-side boxplot summary
+boxplot(Cars93$Min.Price,Cars93$Max.Price)
+
+# Create a bagplot for the same two variables
+bagplot(Cars93$Min.Price,Cars93$Max,cex=1.2)
+
+# Add an equality reference line
+abline(0,1, lty=2)
+```
+
+
+
+![](/home/alfonso/Documentos/github/datavisualzation/boxplot_vs_bagplot.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/boxplot_vs_baplot.png)
+
+## Plotting correlation matrices with the corrplot() function
+
+Correlation matrices were introduced in the video as a useful tool for obtaining a preliminary view of the relationships between multiple numerical variables.
+
+This exercise asks you to use the `corrplot()` function from the `corrplot`package to visualize this correlation matrix for the numerical variables from the [`UScereal`](https://www.rdocumentation.org/packages/MASS/topics/UScereal) data frame in the `MASS` package. Recall that in this version of these plots, ellipses that are thin and elongated indicate a large correlation value between the indicated variables, while ellipses that are nearly circular indicate correlations near zero.
+
+```R
+# Load the corrplot library for the corrplot() function
+library(corrplot)
+library(MASS)
+## set the par paramether
+par(mfrow=c(1,2))
+# Extract the numerical variables from UScereal
+numericalVars <- UScereal[,-c(1,11)]
+
+# Compute the correlation matrix for these variables
+corrMat <- cor(numericalVars)
+ 
+
+# Generate the correlation ellipse plot
+corrplot(corrMat,method="ellipse")
+corrplot(corrMat,method="color")
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/corrplot.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/corrplot.png)
+
+## Building and plotting rpart() models
+
+It was noted in the video that decision trees represent a popular form of predictive model because they are easy to visualize and explain. It was also noted that the `rpart` package is probably the most popular of several R packages that can be used to build and visualize these models.
+
+This exercise asks you to, first, build a decision tree model using the `rpart()`function from this package, and then display the resulting model structure using the generic functions `plot()` and `text()`.
+
+```R
+# Load the rpart library
+library(rpart)
+
+# Fit an rpart model to predict medv from all other Boston variables
+rpart(medv~.,data=Boston) -> tree_model
+
+# Plot the structure of this decision tree model
+plot(tree_model)
+
+# Add labels to this plot
+text(tree_model,cex=0.7)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/treemodel.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/treemodel.png)
+
+## Introduction to the par() function
+
+You already saw how the `mfrow` parameter to the `par()` function could be used to plot multiple graphs in one pane. The `par()` function also allows you to set many other graphics parameters, whose values will remain in effect until they are reset by a subsequent `par()` call.
+
+Specifically, a call to the `par()` function with no parameters specified will return a list whose element names each specify a graphics parameter and whose element values specify the corresponding default values of these parameters. These parameters may be set by a call in the form `par(name = value)` where `name`is the name of the parameter to be set and `value` is the value to be assigned to this parameter.
+
+The purpose of this exercise is to give an idea of what these graphics parameters are. In the subsequent exercises we'll show how some of these parameters can be used to enhance plot results.
+
+
+
+```R
+# Assign the return value from the par() function to plot_pars
+plot_pars <- (par())
+
+# Display the names of the par() function's list elements
+names(plot_pars)
+
+# Display the number of par() function list elements
+length(plot_pars)
+```
+
+## Exploring the type option
+
+One of the important graphics parameters that can be set with the `par()`function is `mfrow`, which specifies the numbers of rows and columns in an array of plots. Valid values for this parameter are two-element numerical vectors, whose first element specifies the number of rows in the plot array and the second element specifies the number of columns.
+
+A more detailed discussion of using the `mfrow` parameter is given in Chapter 4 of this course. For now, note that to specify a plot array with three rows and one column, the command would be `par(mfrow = c(3, 1))`.
+
+The following exercise also introduces the `type` parameter for the `plot()`command, which specifies how the plot is drawn. The specific `type` values used here are:
+
+- `"p"` for "points"
+- `"l"` for "lines"
+- `"o"` for "overlaid" (i.e., lines overlaid with points)
+- `"s"` for "steps"
+
