@@ -89,4 +89,5 @@ title("Log-log plot")R
 ```
 
 ![](/home/alfonso/Documentos/github/datavisualzation/par.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/par.png)
 
