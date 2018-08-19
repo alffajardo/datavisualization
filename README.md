@@ -27,7 +27,7 @@ Here, it is important to make editorial choices in constructing this plot, rathe
 plot(whiteside$Temp,whiteside$Gas,xlab="Outside Temperture",ylab="Heating gas consumption")
 ```
 
-![](/home/alfonso/Documentos/github/Visualization_R/scatterplot1.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot1.png)
 
 ### Adding details to a plot using point shapes, color, and reference lines
 
