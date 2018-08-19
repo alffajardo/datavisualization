@@ -49,4 +49,4 @@ points(Cars93$Price,Cars93$Min.Price,pch=16,col="blue")
 abline(a=0,b=1,lty=2,lwd=2)
 ```
 
-![](/home/alfonso/Documentos/github/Visualization_R/scatterplot2.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot2.png)
