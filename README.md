@@ -413,3 +413,100 @@ The following exercise also introduces the `type` parameter for the `plot()`comm
 - `"o"` for "overlaid" (i.e., lines overlaid with points)
 - `"s"` for "steps"
 
+```R
+# Set up a 2-by-2 plot array
+par(mfrow  = c(2,2))
+
+# Plot the Animals2 brain weight data as points
+plot(Animals2$brain,type="p")
+
+# Add the title
+title("points")
+
+# Plot the brain weights with lines
+plot(Animals2$brain,type="l")
+
+# Add the title
+title("lines")
+
+# Plot the brain weights as lines overlaid with points
+plot(Animals2$brain,type = "o")
+
+# Add the title
+title("overlaid")
+
+# Plot the brain weights as steps
+plot(Animals2$brain,type="s")
+
+# Add the title
+title("steps")
+```
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/types.png)
+
+## The surprising utility of the type "n" option
+
+The `type = "n"` option was discussed in the video and this exercise provides a simple example. This option is especially useful when we are plotting data from multiple sources on a common set of axes. In such cases, we can compute ranges for the x- and y-axes so that all data points will appear on the plot, and then add the data with subsequent calls to `points()` or `lines()` as appropriate.
+
+This exercise asks you to generate a plot that compares mileage vs. horsepower data from two different sources: the `mtcars`data frame in the `datasets` package and the `Cars93` data frame in the `MASS` package. To distinguish the different results from these data sources, the graphics parameter `pch` is used to specify point shapes. See `?points` for a comprehensive list of some `pch` values and their corresponding point shapes.
+
+```R
+# Compute max_hp
+max_hp <- max(Cars93$Horsepower, mtcars$hp)
+
+# Compute max_mpg
+max_mpg <- max(Cars93$MPG.city, Cars93$MPG.highway,
+               mtcars$mpg)
+
+# Create plot with type = "n"               
+plot(Cars93$Horsepower, Cars93$MPG.city,
+     type = "n", xlim = c(0, max_hp),
+     ylim = c(0, max_mpg), xlab = "Horsepower",
+     ylab = "Miles per gallon")
+
+# Add open circles to plot
+points(mtcars$hp, mtcars$mpg, pch = 1)
+
+# Add solid squares to plot
+points(Cars93$Horsepower, Cars93$MPG.city,
+       pch = 15)
+
+# Add open triangles to plot
+points(Cars93$Horsepower, Cars93$MPG.highway,
+       pch = 2)
+```
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/ntype.png)
+
+## The lines() function and line types
+
+As noted in Chapter 2, numerical data is often assumed to conform approximately to a Gaussian probability distribution, characterized by the bell curve. One point of this exercise is to show what this bell curve looks like for exactly Gaussian data and the other is to show how the `lines()` function can be used to add lines to an existing plot.
+
+The curves you are asked to draw here have the same basic shape but differ in their details (specifically, the means and standard deviations of these Gaussian distributions are different). For this reason, it is useful to draw these curves with different line types to help us distinguish them.
+
+Note that line types are set by the `lty` argument, with the default value `lty = 1` specifying solid lines, `lty = 2`specifying dashed lines, and `lty = 3` specifying dotted lines. Also note that the `lwd` argument specifies the relative width.
+
+```
+# Create the numerical vector x
+x <- seq(0, 10, length = 200)
+
+# Compute the Gaussian density for x with mean 2 and standard deviation 0.2
+gauss1 <- dnorm(x, mean = 2, sd = 0.2)
+
+# Compute the Gaussian density with mean 4 and standard deviation 0.5
+gauss2 <- dnorm(x, mean = 4, sd = 0.5)
+
+# Plot the first Gaussian density
+plot(x, gauss1, type = "l", ylab = "Gaussian probability density")
+
+# Add lines for the second Gaussian density
+lines(x, gauss2, lty = 2, lwd = 3)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/lines.png)
+
+##The points() function and point types
+
+One advantage of specifying the `pch` argument locally is that, in a call to functions like `plot()` or `points()`, local specification allows us to make `pch` depend on a variable in our dataset. This provides a simple way of indicating different data subsets with different point shapes or symbols.
+
+This exercise asks you to generate two plots of `mpg` vs. `hp`from the `mtcars` data frame in the `datasets` package. The first plot specifies the point shapes using numerical values of the `pch` argument defined by the `cyl` variable in the `mtcars`data frame. The second plot illustrates the fact that `pch` can also be specified as a vector of *single characters*, causing each point to be drawn as the corresponding character.
