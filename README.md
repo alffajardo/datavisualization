@@ -198,6 +198,7 @@ The first part of this exercise applies this function to the 16-week chick weigh
 ```R
 # Load the car package to make qqPlot() available
 library(car)
+library(MASS)
 
 # Create index16, pointing to 16-week chicks
 index16 <- which(ChickWeight$Time == 16)
@@ -212,7 +213,7 @@ qqPlot(weights)
 qqPlot(Boston$tax)
 ```
 
-
+![](https://github.com/alffajardo/datavisualzation/blob/master/densities.png)
 
 ## The sunflowerplot() function for repeated numerical data
 
