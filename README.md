@@ -581,7 +581,7 @@ text(x = Cars93$Horsepower[index3],
 
 ![](/home/alfonso/Documentos/github/datavisualzation/text.png)
 
-![](https://github.com/alffajardo/datavisualization/blob/master/text.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/text.png)
 
 ## Adjusting text position, size, and font
 
@@ -615,7 +615,7 @@ text(x = Cars93$Horsepower[index3],
 
 ![](/home/alfonso/Documentos/github/datavisualzation/text_parameter.png)
 
-![](htpps://github.com/alffajardo/datavisualization/blob/master/text_parameter.png)
+![](htpps://github.com/alffajardo/datavisualzation/blob/master/text_parameter.png)
 
 ## Rotating text with the srt argument
 
@@ -646,7 +646,7 @@ text(x = whiteside$Temp[indexA], y = whiteside$Gas[indexA],
 
 ![](/home/alfonso/Documentos/github/datavisualzation/srt.png)
 
-![](https://github.com/alffajardo/datavisualization/blob/master/srt.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/srt.png)
 
 ## Using the legend() function
 
@@ -679,6 +679,6 @@ legend = c("Before","After"))
 
 ![](/home/alfonso/Documentos/github/datavisualzation/legends.png)
 
-![](https://github.com/alffajardo/datavisualization/blob/master/legends.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/legends.png)
 
 ​																																																																																																																																																							
