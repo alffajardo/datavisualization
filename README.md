@@ -503,7 +503,7 @@ plot(x, gauss1, type = "l", ylab = "Gaussian probability density")
 lines(x, gauss2, lty = 2, lwd = 3)
 ```
 
-![](https://github.com/alffajardo/datavisualization/blob/master/lines.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/lines.png)
 
 ## The points() function and point types
 
@@ -529,7 +529,7 @@ points(mtcars$hp, mtcars$mpg,
 
 ![](/home/alfonso/Documentos/github/datavisualzation/points.png)
 
-![](https://github.com/alffajardo/datavisualization/blob/master/points.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/points.png)
 
 ## Adding trend lines from linear regression models
 
@@ -552,7 +552,7 @@ abline(linear_model,lty=2)
 
 ![](/home/alfonso/Documentos/github/datavisualzation/abline.png)
 
-![](https://github.com/alffajardo/datavisualization/blob/master/abline.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/abline.png)
 
 
 
