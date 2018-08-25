@@ -505,8 +505,180 @@ lines(x, gauss2, lty = 2, lwd = 3)
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/lines.png)
 
-##The points() function and point types
+## The points() function and point types
 
 One advantage of specifying the `pch` argument locally is that, in a call to functions like `plot()` or `points()`, local specification allows us to make `pch` depend on a variable in our dataset. This provides a simple way of indicating different data subsets with different point shapes or symbols.
 
 This exercise asks you to generate two plots of `mpg` vs. `hp`from the `mtcars` data frame in the `datasets` package. The first plot specifies the point shapes using numerical values of the `pch` argument defined by the `cyl` variable in the `mtcars`data frame. The second plot illustrates the fact that `pch` can also be specified as a vector of *single characters*, causing each point to be drawn as the corresponding character.
+
+```R
+plot(mtcars$hp, mtcars$mpg, type = "n",
+     xlab = "Horsepower", ylab = "Gas mileage")
+
+# Add points with shapes determined by cylinder number
+points(mtcars$hp, mtcars$mpg, pch = mtcars$cyl)
+
+# Create a second empty plot
+plot(mtcars$hp, mtcars$mpg, type = "n",
+     xlab = "Horsepower", ylab = "Gas mileage")
+
+# Add points with shapes as cylinder characters
+points(mtcars$hp, mtcars$mpg, 
+       pch = as.character(mtcars$cyl))
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/points.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/points.png)
+
+## Adding trend lines from linear regression models
+
+The low-level plot function `abline()` adds a straight line to an existing plot. This line is specified by an intercept parameter `a` and a slope parameter `b`, and the simplest way to set these parameters is directly. For example, the command `abline(a = 0, b = 1)` adds an *equality reference line* with zero intercept and unit (i.e. 1) slope: points for which y = x fall on this reference line, while points with y > x fall above it, and points with y < x fall below it.
+
+An alternative way of specifying these parameters is through a linear regression model that determines them from data. One common application is to generate a scatterplot of y versus x, then fit a linear model that predicts y from x, and finally call `abline()` to add this *best fit* line to the plot.
+
+This exercise asks you to do this for the `Gas` versus `Temp` data from the `whiteside` data frame in the `MASS` package. The standard R function that fits linear regression models is `lm()`, which supports the formula interface. Thus, to fit a linear model that predicts `y` from `x` in the data frame `df`, the call would be `lm(y ~ x, data = df)`. This call returns a linear model object, which can then be passed as an argument to the `abline()` function to draw the desired line on our plot.
+
+```R
+# Build a linear regression model for the whiteside data
+linear_model <- lm(Gas ~ Temp, data = whiteside)
+
+# Create a Gas vs. Temp scatterplot from the whiteside data
+plot(whiteside$Temp, whiteside$Gas)
+
+# Use abline() to add the linear regression line
+abline(linear_model,lty=2)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/abline.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/abline.png)
+
+
+
+## Using the text() function to label plot features
+
+One of the main uses of the `text()` function is to add informative labels to a data plot. The `text()` function takes three arguments:
+
+- `x`, which specifies the value for the x variable,
+- `y`, which specifies the value for the y variable, and
+- `label`, which specifies the label for the x-y value pair.
+
+This exercise asks you to first create a scatterplot of city gas mileage versus horsepower from the `Cars93` data, then identify an interesting subset of the data (i.e. the 3-cylinder cars) and label these points. You will find that assigning a vector to the `x`, `y`, and `label` arguments to `text()` will result in labeling multiple points at once.
+
+```R
+# Create MPG.city vs. Horsepower plot with solid squares
+plot(Cars93$Horsepower, Cars93$MPG.city, pch = 15)
+
+# Create index3, pointing to 3-cylinder cars
+index3 <- which(Cars93$Cylinders == 3)
+
+# Add text giving names of cars next to data points
+text(x = Cars93$Horsepower[index3], 
+     y = Cars93$MPG.city[index3],
+     labels = Cars93$Make[index3], adj = 0)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/text.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/text.png)
+
+## Adjusting text position, size, and font
+
+The previous exercise added explanatory text to a scatterplot. The purpose of this exercise is to improve this plot by modifying the text placement, increasing the text size, and displaying the text in boldface.
+
+It was noted that the `adj` argument to the `text()` function determines the horizontal placement of the text and it can take any value between 0 and 1. In fact, this argument can take values outside this range. That is, making this value negative causes the text to start to the right of the specified `x` position. Similarly, making `adj` greater than 1 causes the text to end to the left of the `x` position.
+
+Another useful optional argument for the `text()` function is `cex`, which scales the default text size. As a specific example, setting `cex = 1.5` increases the text size by 50 percent, relative to the default value. Similarly, specifying `cex = 0.8` reduces the text size by 20 percent.
+
+Finally, the third optional parameter used here is `font`, which can be used to specify one of four text fonts: `font = 1` is the default text font (neither italic nor bold), `font = 2` specifies bold face text, `font = 3` specifies italic text, and `font = 4` specifies both bold and italic text.
+
+
+
+```R
+# Plot MPG.city vs. Horsepower as open circles
+plot(Cars93$Horsepower,Cars93$MPG.city)
+# Create index3, pointing to 3-cylinder cars
+index3 <- which(Cars93$Cylinders==3)
+
+# Highlight 3-cylinder cars as solid circles
+points(Cars93$Horsepower[index3],Cars93$MPG.city[index3],pch=16)
+
+# Add car names, offset from points, with larger bold text
+text(x = Cars93$Horsepower[index3],
+      y = Cars93$MPG.city[index3],
+      labels= Cars93$Make[index3],
+      adj= -0.2,
+      cex= 1.2,
+      font= 4)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/text_parameter.png)
+
+![](htpps://github.com/alffajardo/datavisualization/blob/master/text_parameter.png)
+
+## Rotating text with the srt argument
+
+In addition to the optional arguments used in the previous exercises, the `text()` function also supports a number of other optional arguments that can be used to enhance the text. This exercise uses the `cex` argument to reduce the text size and introduces two new arguments. The first is the `col` argument that specifies the color used to display the text, and the second is the `srt` argument that allows us to rotate the text.
+
+Color has been used in several of the previous exercises to specify point colors, and the effective use of color is discussed further in Chapter 5. One of the points of this exercise is to show that the specification of text color with the `text()` function is essentially the same as the specification of point color with the `plot()` function. As a specific example, setting `col = "green"` in the `text()` function causes the text to appear in green. If `col` is not specified, the text appears in the default color set by the `par()` function, which is typically black.
+
+The `srt` parameter allows us to rotate the text through an angle specified in degrees. The typical default value (set by the `par()` function) is 0, causing the text to appear horizontally, reading from left to right. Specifying `srt = 90` causes the text to be rotated 90 degrees counter-clockwise so that it reads from bottom to top instead of left to right.
+
+```R
+# Plot Gas vs. Temp as solid triangles
+plot(whiteside$Temp, whiteside$Gas, pch = 17)
+
+# Create indexB, pointing to "Before" data
+indexB <- which(whiteside$Insul == "Before")
+
+# Create indexA, pointing to "After" data
+indexA <- which(whiteside$Insul == "After")
+
+# Add "Before" text in blue, rotated 30 degrees, 80% size
+text(x = whiteside$Temp[indexB], y = whiteside$Gas[indexB],
+     labels = "Before", col = "blue", srt = 30, cex = 0.8)
+
+# Add "After" text in red, rotated -20 degrees, 80% size
+text(x = whiteside$Temp[indexA], y = whiteside$Gas[indexA],
+     labels = "After", col = "red", srt = -20, cex = 0.8)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/srt.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/srt.png)
+
+## Using the legend() function
+
+The video described and illustrated the use of the `legend()` function to add explanatory text to a plot.
+
+This exercise asks you to first create a scatterplot and then use this function to add explanatory text for the point shapes that identify two different data subsets.
+
+```R
+# Set up and label empty plot of Gas vs. Temp
+plot(whiteside$Temp,whiteside$Gas,
+     type = "n", xlab = "Outside temperature",
+     ylab = "Heating gas consumption")
+
+# Create indexB, pointing to "Before" data
+indexB <- which(whiteside$Insul=="Before")
+
+# Create indexA, pointing to "After" data
+indexA <-  which(whiteside$Insul=="After")
+
+# Add "Before" data as solid triangles
+points(whiteside$Temp[indexB],whiteside$Gas[indexB],pch=17)
+
+# Add "After" data as open circles
+points(whiteside$Temp[indexA],whiteside$Gas[indexA],pch=1)
+
+# Add legend that identifies points as "Before" and "After"
+legend("topright", pch = c(17,1), 
+legend = c("Before","After"))
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/legends.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/legends.png)
+
+​																																																																																																																																																							
