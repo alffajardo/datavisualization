@@ -615,7 +615,7 @@ text(x = Cars93$Horsepower[index3],
 
 ![](/home/alfonso/Documentos/github/datavisualzation/text_parameter.png)
 
-![](htpps://github.com/alffajardo/datavisualzation/blob/master/text_parameter.png)
+![](https://github.com/alffajardo/datavisualzation/blob/master/text_parameter.png)
 
 ## Rotating text with the srt argument
 
