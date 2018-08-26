@@ -33,9 +33,9 @@ Here, it is important to make editorial choices in constructing this plot, rathe
 plot(whiteside$Temp,whiteside$Gas,xlab="Outside Temperture",ylab="Heating gas consumption")
 ```
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot1.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/scatterplot1.png)
 
-![](/home/alfonso/Documentos/github/datavisualzation/scatterplot1.png)
+![](/home/alfonso/Documentos/github/datavisualization/scatterplot1.png)
 
 
 
@@ -59,11 +59,11 @@ points(Cars93$Price,Cars93$Min.Price,pch=16,col="blue")
 abline(a=0,b=1,lty=2,lwd=2)
 ```
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot2.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/scatterplot2.png)
 
 
 
-![](/home/alfonso/Documentos/github/datavisualzation/scatterplot2.png)
+![](/home/alfonso/Documentos/github/datavisualization/scatterplot2.png)
 
 ### Creating multiple plot arrays
 
@@ -92,8 +92,8 @@ plot(Animals2$body,Animals2$brain,log="xy")
 title("Log-log plot")
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/par.png)
-![](https://github.com/alffajardo/datavisualzation/blob/master/par.png)
+![](/home/alfonso/Documentos/github/datavisualization/par.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/par.png)
 
 ### Avoid Pie charts
 
@@ -132,9 +132,9 @@ title("Bar chart")
 
 
 
-![](/home/alfonso/Documentos/github/datavisualzation/pie_vs_bar.png)
+![](/home/alfonso/Documentos/github/datavisualization/pie_vs_bar.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/pie_vs_bar.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/pie_vs_bar.png)
 
 ### The hist() and truehist() functions
 
@@ -159,9 +159,9 @@ The purpose of this exercise is to introduce two of these:
   
   ```
 
-  ![](/home/alfonso/Documentos/github/datavisualzation/hist_truhist.png)
+  ![](/home/alfonso/Documentos/github/datavisualization/hist_truhist.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/hist_truhist.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/hist_truhist.png)
 
 ## Density plots as smoothed histograms
 
@@ -181,9 +181,9 @@ truehist(weights)
 lines(density(weights))R
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/density_histogram.png)
+![](/home/alfonso/Documentos/github/datavisualization/density_histogram.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/density_histogram.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/density_histogram.png)
 
 
 
@@ -213,7 +213,7 @@ qqPlot(weights)
 qqPlot(Boston$tax)
 ```
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/densities.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/densities.png)
 
 ## The sunflowerplot() function for repeated numerical data
 
@@ -241,9 +241,9 @@ sunflowerplot(Boston$zn,Boston$rad)
 title("Sunflower plot")
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/scatterplot_sunflowerplot.png)
+![](/home/alfonso/Documentos/github/datavisualization/scatterplot_sunflowerplot.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/scatterplot_sunflowerplot.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/scatterplot_sunflowerplot.png)
 
 ## Useful options for the boxplot() function
 
@@ -269,9 +269,9 @@ boxplot(crim ~ rad, data = Boston,
 title("Crime rate vs. radial highway index")
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/boxplot.png)
+![](/home/alfonso/Documentos/github/datavisualization/boxplot.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/boxplot.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/boxplot.png)
 
 ## Using the mosaicplot() function
 
@@ -286,9 +286,9 @@ More specifically, this exercise asks you to construct a mosaic plot showing the
 mosaicplot(carb ~ cyl, data=mtcars)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/mosaicplot.png)
+![](/home/alfonso/Documentos/github/datavisualization/mosaicplot.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/mosaicplot.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/mosaicplot.png)
 
 
 
@@ -323,9 +323,9 @@ abline(0,1, lty=2)
 
 
 
-![](/home/alfonso/Documentos/github/datavisualzation/boxplot_vs_bagplot.png)
+![](/home/alfonso/Documentos/github/datavisualization/boxplot_vs_bagplot.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/boxplot_vs_baplot.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/boxplot_vs_baplot.png)
 
 ## Plotting correlation matrices with the corrplot() function
 
@@ -351,9 +351,9 @@ corrplot(corrMat,method="ellipse")
 corrplot(corrMat,method="color")
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/corrplot.png)
+![](/home/alfonso/Documentos/github/datavisualization/corrplot.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/corrplot.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/corrplot.png)
 
 ## Building and plotting rpart() models
 
@@ -375,9 +375,9 @@ plot(tree_model)
 text(tree_model,cex=0.7)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/treemodel.png)
+![](/home/alfonso/Documentos/github/datavisualization/treemodel.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/treemodel.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/treemodel.png)
 
 ## Introduction to the par() function
 
@@ -442,7 +442,7 @@ plot(Animals2$brain,type="s")
 title("steps")
 ```
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/types.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/types.png)
 
 ## The surprising utility of the type "n" option
 
@@ -476,7 +476,7 @@ points(Cars93$Horsepower, Cars93$MPG.highway,
        pch = 2)
 ```
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/ntype.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/ntype.png)
 
 ## The lines() function and line types
 
@@ -503,7 +503,7 @@ plot(x, gauss1, type = "l", ylab = "Gaussian probability density")
 lines(x, gauss2, lty = 2, lwd = 3)
 ```
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/lines.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/lines.png)
 
 ## The points() function and point types
 
@@ -527,9 +527,9 @@ points(mtcars$hp, mtcars$mpg,
        pch = as.character(mtcars$cyl))
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/points.png)
+![](/home/alfonso/Documentos/github/datavisualization/points.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/points.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/points.png)
 
 ## Adding trend lines from linear regression models
 
@@ -550,9 +550,9 @@ plot(whiteside$Temp, whiteside$Gas)
 abline(linear_model,lty=2)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/abline.png)
+![](/home/alfonso/Documentos/github/datavisualization/abline.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/abline.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/abline.png)
 
 
 
@@ -579,9 +579,9 @@ text(x = Cars93$Horsepower[index3],
      labels = Cars93$Make[index3], adj = 0)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/text.png)
+![](/home/alfonso/Documentos/github/datavisualization/text.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/text.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/text.png)
 
 ## Adjusting text position, size, and font
 
@@ -613,9 +613,9 @@ text(x = Cars93$Horsepower[index3],
       font= 4)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/text_parameter.png)
+![](/home/alfonso/Documentos/github/datavisualization/text_parameter.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/text_parameter.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/text_parameter.png)
 
 ## Rotating text with the srt argument
 
@@ -644,9 +644,9 @@ text(x = whiteside$Temp[indexA], y = whiteside$Gas[indexA],
      labels = "After", col = "red", srt = -20, cex = 0.8)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/srt.png)
+![](/home/alfonso/Documentos/github/datavisualization/srt.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/srt.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/srt.png)
 
 ## Using the legend() function
 
@@ -677,9 +677,9 @@ legend("topright", pch = c(17,1),
 legend = c("Before","After"))
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/legends.png)
+![](/home/alfonso/Documentos/github/datavisualization/legends.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/legends.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/legends.png)
 
 ​																																																																																																																																																							
 
@@ -707,9 +707,9 @@ axis(side = 3, at = c(1, 2, 3),
      labels = c("floor", "middle", "top"))
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/axis.png)
+![](/home/alfonso/Documentos/github/datavisualization/axis.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/axis.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/axis.png)
 
 ##  Using the supsmu() function to add smooth trend curves
 
@@ -734,9 +734,9 @@ trend2 <- supsmu(Cars93$Horsepower,Cars93$MPG.city,bass =10)
 lines(trend2,lty=3,lwd=2)
 ```
 
-![](/home/alfonso/Documentos/github/datavisualzation/supsmu.png)
+![](/home/alfonso/Documentos/github/datavisualization/supsmu.png)
 
-![](https://github.com/alffajardo/datavisualzation/blob/master/supsmu.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/supsmu.png)
 
 
 
