@@ -677,7 +677,7 @@ legend = c("Before","After"))
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/legends.png)
 
-​																																																																																																																																																							
+																																																																																																																																																							
 
 ## Adding custom axes with the axis() function
 
@@ -915,7 +915,7 @@ As noted in the video, another useful application of multiple plot arrays beside
 This exercise illustrates this idea, giving four views of the same dataset: a plot of the raw data values themselves, a histogram of these data values, a density plot, and a normal QQ-plot.
 
 ```R
- Set up a two-by-two plot array
+ # Set up a two-by-two plot array
 par(mfrow = c(2, 2))
 
 # Plot the raw duration data
@@ -930,6 +930,8 @@ plot(density(geyser$duration), main = "Density")
 # Construct the normal QQ-plot of the duration data
 qqPlot(geyser$duration, main = "QQ-plot")
 ```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/multiple_plots.png)
 
 ## Constructing and displaying layout matrices
 
@@ -1005,3 +1007,82 @@ title("After data only")
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/triangle_layout.png)
 
+## Creating arrays with different sized plots
+
+Besides creating non-rectangular arrays, the `layout()`function can be used to create plot arrays with different sized component plots -- something else that is not possible by setting the `par()` function's `mfrow` parameter.
+
+This exercise illustrates the point, asking you to create a standard scatterplot of the `zn` versus `rad` variables from the `Boston` data frame as a smaller plot in the upper left, with a larger sunflower plot of the same data in the lower right.
+
+```R
+# Create row1, row2, and layoutVector
+row1 <- c(1,0,0)
+row2 <- c(0,2,2)
+layoutVector <- c(row1,row2,row2)
+
+# Convert layoutVector into layoutMatrix
+layoutMatrix <- matrix(layoutVector,byrow=T, nrow=3)
+
+# Set up the plot array
+layout(layoutMatrix)
+
+# Plot scatterplot
+plot(Boston$rad,Boston$zn)
+
+# Plot sunflower plot
+sunflowerplot(Boston$rad,Boston$zn)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/diferent_size.png)
+
+## Some plot functions also return useful information
+
+As shown in the video, calling the `barplot()` function has the *side effect* of creating the plot we want, but it also returns a numerical vector with the center positions of each bar in the plot. This value is returned invisibly so we don't normally see it, but we can capture it with an assignment statement.
+
+These return values can be especially useful when we want to overlay text on the bars of a horizontal barplot. Then, we capture the return values and use them as the `y` parameter in a subsequent call to the `text()` function, allowing us to place the text at whatever `x` position we want but overlaid in the middle of each horizontal bar. This exercise asks you to construct a horizontal barplot that exploits these possibilities.
+
+Feel free to reference a similar example in the slides by clicking on the "Slides" tab next to the "R Console" tab.
+
+```R
+# Create a table of Cylinders frequencies
+tbl <- table(Cars93$Cylinders)
+
+# Generate a horizontal barplot of these frequencies
+mids <- barplot(tbl, horiz = TRUE, 
+                col = "transparent",
+                names.arg = "")
+
+# Add names labels with text()
+text(20, mids, names(tbl))
+
+# Add count labels with text()
+text(35, mids, as.numeric(tbl))
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/text_barplot.png)
+
+## Using the symbols() function to display relations between more than two variables
+
+The scatterplot allows us to see how one numerical variable changes with the values of a second numerical variable. The `symbols()` function allows us to extend scatterplots to show the influence of other variables.
+
+This function is called with the variables `x` and `y` that define a scatterplot, along with another argument that specifies one of several possible shapes. Here, you are asked to use the `circles` argument to create a *bubbleplot* where each data point is represented by a circle whose radius depends on the third variable specified by the value of this argument.
+
+```R
+# Call symbols() to create the default bubbleplot
+symbols(Cars93$Horsepower, Cars93$MPG.city,
+        circles = sqrt(Cars93$Price))
+
+# Repeat, with the inches argument specified
+symbols(Cars93$Horsepower, Cars93$MPG.city,
+        circles = sqrt(Cars93$Price),
+        inches = 0.1)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/bubbleplot.png)
+
+## Saving plot results as files
+
+In an interactive R session, we typically generate a collection of different plots, often using the results to help us decide how to proceed with our analysis. This is particularly true in the early phases of an exploratory data analysis, but once we have generated a plot we want to share with others, it is important to save it in an external file.
+
+R provides support for saving graphical results in several different external file formats, including jpeg, png, tiff, or pdf files. In addition, we can incorporate graphical results into external documents, using tools like the `Sweave()` function or the `knitr` package. One particularly convenient way of doing this is to create an R Markdown document, an approach that forms the basis for another DataCamp course.
+
+Because png files can be easily shared and viewed as e-mail attachments and incorporated into many slide preparation packages (e.g. Microsoft Powerpoint), this exercise asks you to create a plot and save it as a png file. The basis for this process is the `png()` function, which specifies the name of the png file to be generated and sets up a special environment that captures all graphical output until we exit this environment with the `dev.off()` command.
