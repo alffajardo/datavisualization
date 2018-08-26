@@ -682,3 +682,62 @@ legend = c("Before","After"))
 ![](https://github.com/alffajardo/datavisualzation/blob/master/legends.png)
 
 ​																																																																																																																																																							
+
+## Adding custom axes with the axis() function
+
+Typical base graphics functions like `boxplot()` provide x- and y-axes by default, with a label for the x-axis below the plot and one for the y-axis label to the left of the plot. These labels are generated automatically from the variable names used to generate the plot. Sometimes, we want to provide our own axes labels, and R makes this possible in two steps: first, we suppress the default axes when we create the plot by specifying `axes = FALSE`; then, we call the low-level graphics function `axis()` to create the axes we want.
+
+In this exercise, you're asked to create your own labels using the `axis()` function with the `side`, `at`, and `labels` arguments. The `side` argument tells the function which axis to create: a value of 1 adds an axis below the plot; 2 adds an axis on the left; 3 puts it across the top; and 4 puts it on the right side. The second argument, `at`, is a vector that defines points where tick-marks will be drawn on the axis. The third argument, `labels`, is a vector that defines labels at each of these tick-marks.
+
+One example of a boxplot with custom axes was presented in the video. This exercise asks you to create another example showing the relationship between the `sugars` variable and the `shelf` variable from the `UScereal` data frame in the `MASS` package.
+
+```R
+# Create a boxplot of sugars by shelf value, without axes
+boxplot(sugars ~ shelf, data = UScereal,
+        axes = FALSE)
+
+# Add a default y-axis to the left of the boxplot
+axis(side = 2)
+
+# Add an x-axis below the plot, labelled 1, 2, and 3
+axis(side = 1, at = c(1, 2, 3))
+
+# Add a second x-axis above the plot
+axis(side = 3, at = c(1, 2, 3),
+     labels = c("floor", "middle", "top"))
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/axis.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/axis.png)
+
+##  Using the supsmu() function to add smooth trend curves
+
+As we saw in the video, some scatterplots exhibit fairly obvious trends that are not linear. In such cases, we may want to add a curved trend line that highlights this behavior of the data and the `supsmu()` function represents one way of doing this.
+
+To use this function, we need to specify values for the required arguments `x` and `y`, but it also has a number of optional arguments. Here, we consider the optional `bass` argument, which controls the degree of smoothness in the resulting trend curve. The default value is 0, but specifying larger values (up to a maximum of 10) results in a smoother curve. This exercise asks you to use the `supsmu()` function to add two trend lines to a scatterplot, one using the default parameters and the other with increased smoothness.
+
+```R
+# Create a scatterplot of MPG.city vs. Horsepower
+plot(Cars93$Horsepower,Cars93$MPG.city)
+
+# Call supsmu() to generate a smooth trend curve, with default bass
+trend1 <- supsmu(Cars93$Horsepower,Cars93$MPG.city,bass =0)
+
+# Add this trend curve to the plot
+lines(trend1)
+
+# Call supsmu() for a second trend curve, with bass = 10
+trend2 <- supsmu(Cars93$Horsepower,Cars93$MPG.city,bass =10)
+
+# Add this trend curve as a heavy, dotted line
+lines(trend2,lty=3,lwd=2)
+```
+
+![](/home/alfonso/Documentos/github/datavisualzation/supsmu.png)
+
+![](https://github.com/alffajardo/datavisualzation/blob/master/supsmu.png)
+
+
+
+ 	
