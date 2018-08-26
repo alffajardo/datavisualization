@@ -1,9 +1,5 @@
 
 
-
-
-
-
 # Data visualization in R (datacamp)
 
 ## Lerning to plot with R graphics
@@ -738,6 +734,274 @@ lines(trend2,lty=3,lwd=2)
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/supsmu.png)
 
+## Too much is too much
+
+The first example presented in Chapter 1 applied the `plot()` function to a data frame, yielding an array of scatterplots with one for each pair of columns in the data frame. Thus, the number of plots in this array is equal to the square of the number of columns in the data frame.
+
+This means that if we apply the `plot()` function to a data frame with many columns, we will generate an enormous array of scatterplots, each of which will be too small to be useful. The purpose of this exercise is to provide a memorable example. 	
 
 
- 	
+
+```R
+# Compute the number of plots to be displayed
+ncol(Cars93)^2
+
+# Plot the array of scatterplots
+plot(Cars93)
+```
+
+
+
+![](/home/alfonso/Documentos/github/datavisualization/array.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/array.png)
+
+## Deciding how many scatterplots is too many
+
+As noted in the video, the `matplot()` function can be used to easily generate a plot with several scatterplots on the same set of axes. By default, the points in these scatterplots are represented by the numbers 1 through n, where n is the total number of scatterplots included, but most of the options available with the `plot()` function are also possible by specifying the appropriate arguments.
+
+This exercise asks you to set up a plot array with four of these multiple scatterplot displays, each including one more scatterplot than the previous one. The point of this exercise is to encourage you to judge for yourself *how many scatterplots is too many?*.
+
+```R
+# Construct the vector keep_vars
+keep_vars <- c("calories", "protein", "fat",
+               "fibre", "carbo", "sugars")
+
+# Use keep_vars to extract the desired subset of UScereal
+df <- UScereal[, keep_vars]
+
+# Set up a two-by-two plot array
+par(mfrow = c(2, 2))
+
+# Use matplot() to generate an array of two scatterplots
+matplot(df$calories, df[, c("protein", "fat")], 
+        xlab = "calories", ylab = "")
+
+# Add a title
+title("Two scatterplots")
+
+# Use matplot() to generate an array of three scatterplots
+matplot(df$calories, df[, c("protein", "fat", "fibre")], 
+        xlab = "calories", ylab = "")
+
+# Add a title
+title("Three scatterplots")
+
+# Use matplot() to generate an array of four scatterplots
+matplot(df$calories, 
+        df[, c("protein", "fat", "fibre", "carbo")], 
+        xlab = "calories", ylab = "")
+
+# Add a title
+title("Four scatterplots")
+
+# Use matplot() to generate an array of five scatterplots
+matplot(df$calories, 
+        df[, c("protein", "fat", "fibre", "carbo", "sugars")], 
+        xlab = "calories", ylab = "")
+
+# Add a title
+title("Five scatterplots")
+```
+
+![](/home/alfonso/Documentos/github/datavisualization/matplot.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/matplot.png)
+
+## How many words is too many?
+
+The main point of the previous two exercises has been to show that scatterplot arrays lose their utility if they are allowed to become too complex, either including too many plots, or attempting to include too many scatterplots on one set of axes. More generally, *any* data visualization loses its utility if it becomes too complex.
+
+This exercise asks you to consider this problem with *wordclouds*, displays that present words in varying sizes depending on their frequency. That is, more frequent words appear larger in the display, while rarer words appear in a smaller font.
+
+In R, wordclouds are easy to generate with the `wordcloud()`function in the `wordcloud` package. This function is called with a character vector of words, and a second numerical vector giving the number of times each word appears in the collection used to generate the wordcloud.
+
+Two other useful arguments for this function are `scale` and `min.freq`. The `scale` argument is a two-component numerical vector giving the relative size of the largest word in the display and that of the smallest word. The wordcloud only includes those words that occur at least `min.freq` times in the collection and the default value for this argument is 3.
+
+```
+if(!require(wordcloud)){
+    install.packages("wordcloud")
+    library(wordcloud)
+    
+```
+
+![](/home/alfonso/Documentos/github/datavisualization/wordclouds.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/wordclouds.png)
+
+# The Anscombe quartet
+
+This exercise and the next one are based on the *Anscombe quartet*, a collection of four datasets that appear to be essentially identical on the basis of simple summary statistics like means and standard deviations. For example, the mean x-values for these datasets are identical to three digits, while the mean y-values differ only in the third digit.
+
+In spite of these apparent similarities, the behavior of the four datasets is quite different and this becomes immediately apparent when we plot them.
+
+```R
+library(carData)
+# Set up a two-by-two plot array
+par(mfrow=c(2,2))
+
+# Plot y1 vs. x1 
+plot(anscombe$x1,anscombe$y1)
+
+# Plot y2 vs. x2
+plot(anscombe$x2,anscombe$y2)
+
+# Plot y3 vs. x3
+plot(anscombe$x3,anscombe$y3)
+
+# Plot y4 vs. x4
+plot(anscombe$x4,anscombe$y4)
+```
+
+
+
+![](/home/alfonso/Documentos/github/datavisualization/anscombe_quartet.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/anscombe_quartet.png)
+
+## The utility of common scaling and individual titles
+
+The plots you generated in the previous exercise showed that the four Anscombe quartet datasets have very different appearances, but a careful examination of these plots reveals that they exhibit different ranges of x and y values.
+
+The point of this exercise is to illustrate how much more clearly we can see the differences in these datasets if we plot all of them with the same x and y ranges. This exercise also illustrates the utility of improving the x- and y-axis labels and of adding informative plot titles.
+
+```R
+# Define common x and y limits for the four plots
+xmin <- 4
+xmax <- 19
+ymin <- 3
+ymax <- 13
+
+# Set up a two-by-two plot array
+par(mfrow = c(2, 2))
+
+# Plot y1 vs. x1 with common x and y limits, labels & title
+plot(anscombe$x1, anscombe$y1,
+     xlim = c(xmin, xmax),
+     ylim = c(ymin, ymax),
+     xlab = "x value", ylab = "y value",
+     main = "First dataset")
+
+# Do the same for the y2 vs. x2 plot
+plot(anscombe$x2, anscombe$y2,
+     xlim = c(xmin, xmax),
+     ylim = c(ymin, ymax),
+     xlab = "x value", ylab = "y value",
+     main = "Second dataset")
+
+# Do the same for the y3 vs. x3 plot
+plot(anscombe$x3, anscombe$y3,
+     xlim = c(xmin, xmax),
+     ylim = c(ymin, ymax),
+     xlab = "x value", ylab = "y value",
+     main = "Third dataset")
+
+# Do the same for the y4 vs. x4 plot
+plot(anscombe$x4, anscombe$y4,
+     xlim = c(xmin, xmax),
+     ylim = c(ymin, ymax),
+     xlab = "x value", ylab = "y value",
+     main = "Fourth dataset")
+```
+
+![](/home/alfonso/Documentos/github/datavisualization/limits.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/limits.png)
+
+## Using multiple plots to give multiple views of a dataset
+
+As noted in the video, another useful application of multiple plot arrays besides comparison is presenting multiple related views of the same dataset.
+
+This exercise illustrates this idea, giving four views of the same dataset: a plot of the raw data values themselves, a histogram of these data values, a density plot, and a normal QQ-plot.
+
+```R
+ Set up a two-by-two plot array
+par(mfrow = c(2, 2))
+
+# Plot the raw duration data
+plot(geyser$duration, main = "Raw data")
+
+# Plot the normalized histogram of the duration data
+truehist(geyser$duration, main = "Histogram")
+
+# Plot the density of the duration data
+plot(density(geyser$duration), main = "Density")
+
+# Construct the normal QQ-plot of the duration data
+qqPlot(geyser$duration, main = "QQ-plot")
+```
+
+## Constructing and displaying layout matrices
+
+The video illustrated how to set up a layout matrix to be used with the `layout()` function in creating a plot array. You can think of the layout matrix as the plot pane, where a 0 represents empty space and other numbers represent the plot number, which is determined by the sequence of visualization function calls. For example, a 1 in the layout matrix refers to the visualization that was first called, a 2 refers to the plot of the second visualization call, etc. This exercise asks you to create your own 3 x 2 layout matrix, using the `c()` function to concatenate numbers into vectors that will form the rows of the matrix.
+
+You will then use the `matrix()` function to convert these rows into a matrix and apply the `layout()` function to set up the desired plot array. The convenience function `layout.show()` can then be used to verify that the plot array has the shape you want.
+
+As reference, feel free to use the slides from the video, which you can access by clicking on the "Slides" tab next to the "R Console" tab. Pay close attention to the example layout matrix and the resulting plot array.
+
+```R
+# Use the matrix function to create a matrix with three rows and two columns
+layoutMatrix <- matrix(
+  c(
+    0, 1,
+    2, 0,
+    0, 3
+  ), 
+  byrow = T, 
+  nrow = 3
+)
+
+# Call the layout() function to set up the plot array
+layout(layoutMatrix)
+
+# Show where the three plots will go 
+layout.show(n=3)
+```
+
+![](/home/alfonso/Documentos/github/datavisualization/layout.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/layout.png)
+
+# Creating a triangular array of plots
+
+The previous exercise asked you to create a plot array using the `layout()` function. Recall the layout matrix from the previous exercise:
+
+```
+> layoutMatrix
+     [,1] [,2]
+[1,]    0    1
+[2,]    2    0
+[3,]    0    3
+```
+
+This exercise asks you to use this array to give three different views of the `whiteside` data frame.
+
+ ```R
+# Set up the plot array
+layout(layoutMatrix)
+
+# Construct vectors indexB and indexA
+indexB <- which(whiteside$Insul == "Before")
+indexA <- which(whiteside$Insul == "After")
+
+# Create plot 1 and add title
+plot(whiteside$Temp[indexB], whiteside$Gas[indexB],
+     ylim = c(0,8))
+title("Before data only")
+
+# Create plot 2 and add title
+plot(whiteside$Temp,whiteside$Gas,ylim=c(0,8))
+title("Complete dataset")
+
+
+
+# Create plot 3 and add title
+plot(whiteside$Temp[indexA],whiteside$Gas[indexA],ylim=c(0,8))
+title("After data only")
+
+ ```
+
+![](/home/alfonso/Documentos/github/datavisualization/triangle_layout.png)
+
+![](https://github.com/alffajardo/datavisualization/blob/master/triangle_layout.png)
+
