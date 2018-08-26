@@ -321,7 +321,7 @@ abline(0,1, lty=2)
 
 ![](/home/alfonso/Documentos/github/datavisualization/boxplot_vs_bagplot.png)
 
-![](https://github.com/alffajardo/datavisualization/blob/master/boxplot_vs_baplot.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/boxplot_vs_bagplot.png)
 
 ## Plotting correlation matrices with the corrplot() function
 
