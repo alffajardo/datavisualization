@@ -1,0 +1,16 @@
+#code made for Life Sciences PhD class, University of Buea, Cameroon by InSearch (www.insearchnetwork.com) 2018
+my.data= read.table("clipboard", head =T)  # code for reading in data see our R videos #2 and #3
+attach(my.data)
+mean.worm=tapply(yvar,xfact, mean)   #means
+sd.worm=tapply(yvar,xfact,sd)    #standard devs
+n.worm=tapply(yvar,xfact, length)  # number pe group
+sem.worm = tapply(yvar,xfact,sd)/ sqrt(tapply(yvar,xfact, length) )
+
+mean.worm
+sd.worm
+n.worm
+sem.worm
+
+mids = barplot(mean.worm, xlab = "Number of worms", ylab = "Origin of plant extract", ylim = c(0,70))
+arrows(mids, mean.worm-sem.worm, mids, mean.worm + sem.worm, code = 3, angle = 90, length = 0.1)
+text(mids,2, paste("n = ", n.worm))

@@ -1079,6 +1079,107 @@ symbols(Cars93$Horsepower, Cars93$MPG.city,
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/bubbleplot.png)
 
+## Useful code to generate barplots 
+
+###### simple bar plot
+
+```R
+# generate frequency table
+counts <- table(mtcars$gear)
+# plot the frequency tabel
+barplot(counts, main="Car Distribution", 
+  	xlab="Number of Gears")
+```
+
+if we want to plot in horizontal position simply modify `horiz=T` within the barplot function.
+
+![](htpps://github.com/alffajardo/datavisualization/blob/master/simple_barplots.png)
+
+#####  Stacked barplot
+
+```R
+# Stacked Bar Plot with Colors and Legend
+counts <- table(mtcars$vs, mtcars$gear)
+barplot(counts, main="Car Distribution by Gears and VS",
+  xlab="Number of Gears", col=c("darkblue","red"),
+ 	legend = rownames(counts))
+```
+
+
+
+![](https://github.com/alffajardo/datavisualization/blob/masgter/stacked_barplot.png)
+
+###### Notes:
+
+Bar plots need not be based on counts or frequencies. You can create bar plots that represent means, medians, standard deviations, etc. Use the [aggregate( ) ](https://www.statmethods.net/management/aggregate.html)function and pass the results to the barplot( ) function.
+
+By default, the categorical axis line is suppressed. Include the option **axis.lty=1** to draw it.
+
+With many bars, bar labels may start to overlap. You can decrease the font size using the **cex.names =** option. Values smaller than one will shrink the size of the label. Additionally, you can use [graphical parameters](https://www.statmethods.net/advgraphs/parameters.html) such as the following to help text spacing:
+
+##### Grouped barplot
+
+To indicate you want a grouped bar set t `beside=TRUE`
+
+```
+# Grouped Bar Plot
+counts <- table(mtcars$vs, mtcars$gear)
+barplot(counts, main="Car Distribution by Gears and VS",
+  xlab="Number of Gears", col=c("darkblue","red"),
+ 	legend = rownames(counts), beside=TRUE)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/grouped_barplot.png)
+
+##### Building r plot with error bars
+
+```R
+# Generate an R object with de descriptive statistics to compute
+myData <- aggregate(mtcars$mpg,
+    by = list(cyl = mtcars$cyl, gears = mtcars$gear),
+    FUN = function(x) c(mean = mean(x), sd = sd(x),
+                        n = length(x)))
+# After this, we’ll need to do a little manipulation since the previous function 
+# returned matrices instead of vectors
+# Here `do.call` is an usefull way to call a function.
+
+                    myData <- do.call(data.frame, myData)
+
+# The following code is intended to calculate standard error for each group
+ myData$se <- myData$x.sd / sqrt(myData$x.n)
+
+colnames(myData) <- c("cyl", "gears", "mean", "sd", "n", "se")
+
+myData$names <- c(paste(myData$cyl, "cyl /",
+                        myData$gears, " gear"))                 
+# Now that colummns have been renamed the following code will construct the plot
+                    par(mar = c(5, 6, 4, 5) + 0.1)
+
+plotTop <- max(myData$mean) +
+           myData[myData$mean == max(myData$mean), 6] * 3 # usful to set y limits
+
+barCenters <- barplot(height = myData$mean,
+                  names.arg = myData$names,
+                  beside = T, las = 2,
+                  ylim = c(0, plotTop),
+                  cex.names = 0.75, xaxt = "n",
+                  main = "Mileage by No. Cylinders and No. Gears",
+                  ylab = "Miles per Gallon",
+                  border = "black", axes = TRUE)
+
+# Specify the groupings. We use srt = 45 for a
+# 45 degree string rotation
+text(x = barCenters, y = par("usr")[3] - 1, srt = 45,
+     adj = 1, labels = myData$names, xpd = TRUE)
+
+segments(barCenters, myData$mean - myData$se * 2, barCenters,
+         myData$mean + myData$se * 2, lwd = 1.5)
+
+arrows(barCenters, myData$mean - myData$se * 2, barCenters,
+       myData$mean + myData$se * 2, lwd = 1.5, angle = 90,
+       code = 3, length = 0.05)
+```
+
 ## Saving plot results as files
 
 In an interactive R session, we typically generate a collection of different plots, often using the results to help us decide how to proceed with our analysis. This is particularly true in the early phases of an exploratory data analysis, but once we have generated a plot we want to share with others, it is important to save it in an external file.
