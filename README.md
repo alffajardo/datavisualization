@@ -1180,6 +1180,12 @@ arrows(barCenters, myData$mean - myData$se * 2, barCenters,
        code = 3, length = 0.05)
 ```
 
+![](https://github.com/alffajardo/datavisualization/blob/master/barplot_errorbars.png)
+
+
+
+
+
 ## Saving plot results as files
 
 In an interactive R session, we typically generate a collection of different plots, often using the results to help us decide how to proceed with our analysis. This is particularly true in the early phases of an exploratory data analysis, but once we have generated a plot we want to share with others, it is important to save it in an external file.
