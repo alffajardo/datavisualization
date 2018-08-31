@@ -1221,6 +1221,62 @@ error.bar(ze_barplot,bilan, stdev)
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/barplot_ex2.png)
 
+## Another example of grouped bar plot
+
+```R
+# Create a table summarizing variables (mean,sample size, and standard deviation)
+myData <- aggregate(mtcars$mpg,
+    by = list(cyl = mtcars$cyl, gears = mtcars$gear),
+    FUN = function(x) c(mean = mean(x), sd = sd(x),
+                        n = length(x)))
+# Transform into a data frame
+myData <- do.call(data.frame, myData)
+
+# compute standard error
+                    myData$se <- myData$x.sd / sqrt(myData$x.n)
+
+colnames(myData) <- c("cyl", "gears", "mean", "sd", "n", "se")
+
+myData$names <- c(paste(myData$cyl, "cyl /",
+                        myData$gears, " gear"))
+                    
+# En el caso de que se quiera hacer una gráfica con barras agrupadas es mejor realizar una matrix con las medias. esto es facil de hacer con R de la siguiente forma:
+                    
+                    tabbedMeans <- tapply(myData$mean, list(myData$cyl,
+                                      myData$gears),
+                         function(x) c(x = x))
+tabbedSE <- tapply(myData$se, list(myData$cyl,
+                                      myData$gears),
+                         function(x) c(x = x))
+# Graficamos las tablas generadas:
+                   par(mar = c(5, 6, 4, 5) + 0.1)
+
+                   plotTop <- max(myData$mean) +
+           myData[myData$mean == max(myData$mean), 6] * 3 # usful to set y limits
+
+                   barCenters <- barplot(height = tabbedMeans,
+                      beside = TRUE, las = 1,
+                      ylim = c(0, plotTop),
+                      cex.names = 0.75,
+                      main = "Mileage by No. Cylinders and No. Gears",
+                      ylab = "Miles per Gallon",
+                      xlab = "No. Gears",
+                      border = "black", axes = TRUE,
+                      legend.text = TRUE,
+                      args.legend = list(title = "No. Cylinders", 
+                                         x = "topright",
+                                         cex = .7))
+                   segments(barCenters, tabbedMeans - tabbedSE * 2, barCenters,
+         tabbedMeans + tabbedSE * 2, lwd = 1.5)
+                   arrows(barCenters, tabbedMeans - tabbedSE * 2, barCenters,
+       tabbedMeans + tabbedSE * 2, lwd = 1.5, angle = 90,
+       code = 3, length = 0.05)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/grouped_barplot3.png)
+
+
+
 
 
 
