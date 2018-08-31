@@ -1219,7 +1219,7 @@ ze_barplot = barplot(bilan , beside=T , legend.text=T,col=c("blue" , "skyblue") 
 error.bar(ze_barplot,bilan, stdev)
 ```
 
-![]https://github.com/alffajardo/datavisualization/blob/master/barplot_ex2.png)
+![](https://github.com/alffajardo/datavisualization/blob/master/barplot_ex2.png)
 
 
 
