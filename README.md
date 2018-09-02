@@ -1289,5 +1289,31 @@ R provides support for saving graphical results in several different external fi
 
 Because png files can be easily shared and viewed as e-mail attachments and incorporated into many slide preparation packages (e.g. Microsoft Powerpoint), this exercise asks you to create a plot and save it as a png file. The basis for this process is the `png()` function, which specifies the name of the png file to be generated and sets up a special environment that captures all graphical output until we exit this environment with the `dev.off()` command.
 
-## Grouped barplots
+##  Another two awsome barplots
+
+```R
+Create two awsome barplots
+
+par(mar=c(7, 4, 2, 2) + 0.2,mfrow=c(2,1))
+
+animals <- data.frame( "specie" = row.names(Animals),Animals,brain_index = Animals$brain/Animals$body)
+animals <- animals[with(animals,order(-brain)),]
+end_point <- 0.5 +nrow(animals) + nrow(animals) 
+barplot(animals$brain,main= "Brain weight by specie",xlab="",
+        ylab= "brain weigth (grams)",col="turquoise3",space = 2,
+        ylim=c(0,6000)) 
+text(x = seq(2.5,86,by=3),adj=1,srt=65,xpd=T,par("usr")[3],cex=0.8,
+          labels = as.character(animals$specie),font= 2)
+
+#### ploting brain index
+animals <- animals[with(animals,order(-brain_index)),]
+
+barplot(animals$brain_index,main= "Brain weight relative to body mass",xlab="",
+        ylab= "brain index (grams/kg)",col="skyblue",space = 2,
+         ylim=c(0,30)) 
+text(x = seq(2.5,86,by=3),adj=1,srt=65,xpd=T,par("usr")[3],cex=0.8,
+     labels = as.character(animals$specie),font= 2)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/brain_barplots.png)
 
