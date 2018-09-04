@@ -1317,3 +1317,5 @@ text(x = seq(2.5,86,by=3),adj=1,srt=65,xpd=T,par("usr")[3],cex=0.8,
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/brain_barplots.png)
 
+## linechart categorical varibles vs continues
+
