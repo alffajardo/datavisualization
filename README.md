@@ -1292,16 +1292,16 @@ Because png files can be easily shared and viewed as e-mail attachments and inco
 ##  Another two awsome barplots
 
 ```R
-Create two awsome barplots
-
+# Create two awsome barplots
+library(MASS)
 par(mar=c(7, 4, 2, 2) + 0.2,mfrow=c(2,1))
 
-animals <- data.frame( "specie" = row.names(Animals),Animals,brain_index = Animals$brain/Animals$body)
+animals <- data.frame( "specie" = row.names(Animals),Animals,brain_index = Animals$brain/ (0.12*(Animals$body^0.67)))
 animals <- animals[with(animals,order(-brain)),]
 end_point <- 0.5 +nrow(animals) + nrow(animals) 
 barplot(animals$brain,main= "Brain weight by specie",xlab="",
         ylab= "brain weigth (grams)",col="turquoise3",space = 2,
-        ylim=c(0,6000)) 
+        ylim=c(0,max(animals$brain)+300)) 
 text(x = seq(2.5,86,by=3),adj=1,srt=65,xpd=T,par("usr")[3],cex=0.8,
           labels = as.character(animals$specie),font= 2)
 
@@ -1310,7 +1310,7 @@ animals <- animals[with(animals,order(-brain_index)),]
 
 barplot(animals$brain_index,main= "Brain weight relative to body mass",xlab="",
         ylab= "brain index (grams/kg)",col="skyblue",space = 2,
-         ylim=c(0,30)) 
+         ylim=c(0,max(animals$brain_index)+200)) 
 text(x = seq(2.5,86,by=3),adj=1,srt=65,xpd=T,par("usr")[3],cex=0.8,
      labels = as.character(animals$specie),font= 2)
 ```
