@@ -1350,5 +1350,59 @@ text(x = seq(2.5,86,by=3),adj=1,srt=65,xpd=T,par("usr")[3],cex=0.8,
 
 ![](https://github.com/alffajardo/datavisualization/blob/master/brain_barplots.png)
 
-## linechart categorical varibles vs continues
+## linechart categorical varibles vs continues`` 
+
+```R
+#create new spaguetti plot with the data
+
+## First create data s
+conditions <- paste("RM",1:4,sep="_")
+subjects <- paste("rat",1:20,sep="_")
+n <- 10
+s <- 4
+values <- c()
+
+for ( i in 1:n){
+ values <- rbind(values,rnorm(s,20,sd=runif(1)*10))
+}
+for (i in 1:n){
+  values <- rbind(values,rnorm(s,5,sd=runif(1)*10))
+}
+group <- as.factor(c(rep("sham",10),rep("pilo",10)))
+
+data <- data.frame(group,values,row.names = subjects)
+names(data) <- c("Group",conditions)
+###
+Nr <- length(data[,1])
+Nc <- length(data[1,]) - 1
+# A vector of colours for each condition
+colv <- c("darkred","darkgreen")[data$Group]
+ltyv <- c(1,2)[data$Group]
+x <- 1:Nc
+ylimit <- c(floor(min(data[,2:5])/5)*5,ceiling(max(data[,2:5])/5)*5)
+
+## create empty plot
+plot(1:Nr,data$RM_1,type = "n",main = "Rs- BOLD",xlim=c(0,Nc),
+     ylim = ylimit,axes = F, xlab = '',ylab='')
+## add x axis
+axis(1, at = seq(0,3,by = 1
+                 ) ,lwd=2,labels = conditions)
+axis(2, at = seq(ylimit[1],ylimit[2],by = 5),lwd=2)
+
+## draw the lines
+
+for (i in 1:Nr){
+  lines(0:3,data[i,2:5],col=colv[i],lwd=2,lty=ltyv[i])
+}
+## draw the pints
+for (i in 1:Nr){
+ points(0:3,data[i,2:5],col=colv[i],cex=1.5,pch=16)
+}  
+## add a legend
+
+legend(x=3,y=40,lty=c(2,1),legend = c("sham","pilo"),col=c("darkgreen","darkred"),
+       cex=0.5,border = F,xpd = T)
+```
+
+![](https://github.com/alffajardo/datavisualization/blob/master/linechart_points.png)
 
